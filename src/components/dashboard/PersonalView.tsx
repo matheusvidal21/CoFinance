@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowDownCircle, Wallet, TrendingUp, TrendingDown } from "lucide-react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import RecentTransactions from "./RecentTransactions"
+import Statistics from "./Statistics"
 
 interface DashboardData {
   summary: {
@@ -16,6 +17,8 @@ interface DashboardData {
   categories: { name: string; value: number }[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   recentTransactions?: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transactions?: any[]
 }
 
 export default function PersonalView() {
@@ -100,6 +103,13 @@ export default function PersonalView() {
           </CardContent>
         </Card>
       </div>
+
+      {data.transactions && data.transactions.length > 0 && (
+        <Statistics 
+          transactions={data.transactions} 
+          categories={data.categories} 
+        />
+      )}
 
       <Card className="glass-card">
         <CardHeader>

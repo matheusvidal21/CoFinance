@@ -135,7 +135,8 @@ export async function GET(request: Request) {
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value),
       pendingBalances: enrichedBalances,
-      recentTransactions
+      recentTransactions,
+      transactions // Transações do mês para estatísticas
     })
   } catch (error) {
     console.error("Shared dashboard error:", error)

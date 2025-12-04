@@ -8,6 +8,7 @@ import PendingBalances from "@/components/dashboard/PendingBalances"
 import RecentTransactions from "@/components/dashboard/RecentTransactions"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import Statistics from "./Statistics"
 
 interface SharedDashboardData {
   hasGroup: boolean
@@ -21,7 +22,9 @@ interface SharedDashboardData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pendingBalances?: any[] 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  recentTransactions?: any[] 
+  recentTransactions?: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transactions?: any[]
 }
 
 export default function SharedView() {
@@ -133,6 +136,13 @@ export default function SharedView() {
           </CardContent>
         </Card>
       </div>
+
+      {data.transactions && data.transactions.length > 0 && (
+        <Statistics 
+          transactions={data.transactions} 
+          categories={data.categories || []} 
+        />
+      )}
 
       <div className="grid gap-6 lg:grid-cols-5">
         <Card className="glass-card lg:col-span-2 overflow-hidden relative">

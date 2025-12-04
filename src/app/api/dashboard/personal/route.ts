@@ -80,7 +80,8 @@ export async function GET(request: Request) {
       categories: Object.entries(categoryTotals)
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value),
-      recentTransactions
+      recentTransactions,
+      transactions // Transações do mês para estatísticas
     })
   } catch (error) {
     console.error("Personal dashboard error:", error)
