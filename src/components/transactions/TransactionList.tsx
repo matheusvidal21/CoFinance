@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { format } from "date-fns"
 import { ArrowDownCircle, ArrowUpCircle, Users, User } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 
 interface Transaction {
   id: string
@@ -74,15 +75,14 @@ export default function TransactionList({ type = "all", refreshTrigger }: { type
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span>{format(new Date(transaction.date), "dd/MM/yyyy")}</span>
                 <span>•</span>
-                <span>{transaction.category}</span>
+                <Badge variant="outline" className="text-xs px-2 py-0 h-5">
+                  {transaction.category}
+                </Badge>
                 {transaction.isShared && (
-                  <>
-                    <span>•</span>
-                    <span className="flex items-center gap-1 text-primary">
-                      <Users className="h-3 w-3" />
-                      Compartilhado
-                    </span>
-                  </>
+                  <Badge variant="secondary" className="text-xs px-2 py-0 h-5 gap-1">
+                    <Users className="h-3 w-3" />
+                    Compartilhado
+                  </Badge>
                 )}
               </div>
             </div>
@@ -90,12 +90,13 @@ export default function TransactionList({ type = "all", refreshTrigger }: { type
           
           <div className="text-right">
             <p className={cn(
-              "font-bold",
-              transaction.type === "INCOME" ? "text-green-600" : "text-foreground"
+              "font-bold text-lg",
+              transaction.type === "INCOME" ? "text-green-600" : "text-red-600"
             )}>
               {transaction.type === "INCOME" ? "+" : "-"} R$ {Number(transaction.amount).toFixed(2)}
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground flex items-center justify-end gap-1">
+              <User className="h-3 w-3" />
               {transaction.user.name}
             </p>
           </div>
