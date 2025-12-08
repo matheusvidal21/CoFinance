@@ -1,8 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { ArrowUpCircle, ArrowDownCircle, Receipt } from "lucide-react"
+import { ArrowUpCircle, ArrowDownCircle, Receipt, ChevronDown } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface Transaction {
   id: string
@@ -22,6 +24,11 @@ interface RecentTransactionsProps {
 }
 
 export default function RecentTransactions({ transactions, showUser = false }: RecentTransactionsProps) {
+  const [displayCount, setDisplayCount] = useState(5)
+  
+  const displayedTransactions = transactions.slice(0, displayCount)
+  const hasMore = transactions.length > displayCount
+
   if (transactions.length === 0) {
     return (
       <div className="py-8 text-center space-y-3">
@@ -34,8 +41,9 @@ export default function RecentTransactions({ transactions, showUser = false }: R
   }
 
   return (
-    <div className="space-y-2">
-      {transactions.map((transaction) => (
+    <div className="space-y-3">
+      <div className="space-y-2 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+        {displayedTransactions.map((transaction) => (
         <div
           key={transaction.id}
           className="flex items-center justify-between p-4 bg-gradient-to-r from-white/50 to-white/30 dark:from-white/5 dark:to-white/2 rounded-xl border border-border/30 hover:border-primary/20 hover:shadow-sm transition-all duration-200 group"
@@ -80,6 +88,19 @@ export default function RecentTransactions({ transactions, showUser = false }: R
           </div>
         </div>
       ))}
+      </div>
+      
+      {hasMore && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full"
+          onClick={() => setDisplayCount(prev => prev + 5)}
+        >
+          <ChevronDown className="h-4 w-4 mr-2" />
+          Carregar mais ({transactions.length - displayCount} restantes)
+        </Button>
+      )}
     </div>
   )
 }
