@@ -9,6 +9,7 @@ import RecentTransactions from "@/components/dashboard/RecentTransactions"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Statistics from "./Statistics"
+import SettlementHistory from "./SettlementHistory"
 
 interface SharedDashboardData {
   hasGroup: boolean
@@ -30,6 +31,7 @@ interface SharedDashboardData {
 export default function SharedView() {
   const [data, setData] = useState<SharedDashboardData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [refreshTrigger, setRefreshTrigger] = useState(0)
 
   const fetchData = async () => {
     try {
@@ -41,6 +43,11 @@ export default function SharedView() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleSettled = () => {
+    fetchData()
+    setRefreshTrigger(prev => prev + 1)
   }
 
   useEffect(() => {
@@ -158,8 +165,12 @@ export default function SharedView() {
               Acerto de Contas
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <PendingBalances balances={data.pendingBalances || []} onSettled={fetchData} />
+          <CardContent className="space-y-4">
+            <PendingBalances balances={data.pendingBalances || []} onSettled={handleSettled} />
+            
+            <div className="pt-4 border-t border-border/30">
+              <SettlementHistory refreshTrigger={refreshTrigger} />
+            </div>
           </CardContent>
         </Card>
 
