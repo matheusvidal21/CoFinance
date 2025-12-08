@@ -56,7 +56,10 @@ export default function PendingBalances({ balances, onSettled }: PendingBalances
         throw new Error(data.error || "Erro ao registrar pagamento")
       }
 
-      toast.success(`Pagamento de R$ ${data.totalAmount.toFixed(2)} registrado com sucesso!`)
+      toast.success("Pagamento registrado com sucesso!", {
+        description: `R$ ${data.totalAmount.toFixed(2)} quitado com ${balance.to}`,
+        duration: 4000,
+      })
       
       if (onSettled) {
         setTimeout(() => {
@@ -64,7 +67,10 @@ export default function PendingBalances({ balances, onSettled }: PendingBalances
         }, 800)
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erro ao processar pagamento")
+      toast.error("Erro ao processar pagamento", {
+        description: err instanceof Error ? err.message : "Tente novamente mais tarde",
+        duration: 4000,
+      })
     } finally {
       setProcessingId(null)
     }
