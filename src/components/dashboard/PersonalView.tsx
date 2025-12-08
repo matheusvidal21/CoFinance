@@ -6,6 +6,7 @@ import { ArrowDownCircle, Wallet, TrendingUp, TrendingDown } from "lucide-react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import RecentTransactions from "./RecentTransactions"
 import Statistics from "./Statistics"
+import MonthlyGoalIndicator from "./MonthlyGoalIndicator"
 
 interface DashboardData {
   summary: {
@@ -103,6 +104,13 @@ export default function PersonalView() {
           </CardContent>
         </Card>
       </div>
+
+      {data.monthlyIncome && data.monthlyIncome > 0 && (
+        <MonthlyGoalIndicator 
+          monthlyIncome={data.monthlyIncome} 
+          expense={data.summary.expense} 
+        />
+      )}
 
       {data.transactions && data.transactions.length > 0 && (
         <Statistics 
