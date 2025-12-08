@@ -84,9 +84,14 @@ export default function SharedView() {
           <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
             <Users className="h-5 w-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">
-            {data.groupName}
-          </h3>
+          <div>
+            <h3 className="text-lg font-semibold text-foreground">
+              {data.groupName}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {data.transactions?.length || 0} transações este mês
+            </p>
+          </div>
         </div>
       </div>
 
