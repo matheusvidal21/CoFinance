@@ -54,50 +54,61 @@ export default async function DashboardLayout({
       </div>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-72 flex-col border-r border-border/30 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl sticky top-0 h-screen p-6">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
-            <Sparkles className="h-5 w-5 text-white" />
+      <aside className="hidden md:flex w-72 flex-col border-r border-border/20 bg-gradient-to-b from-white/70 via-white/60 to-white/50 dark:from-gray-900/70 dark:via-gray-900/60 dark:to-gray-900/50 backdrop-blur-2xl sticky top-0 h-screen p-6 shadow-xl">
+        <div className="flex items-center gap-3 mb-10 group">
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-secondary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-xl group-hover:shadow-primary/40 transition-all duration-300 group-hover:scale-105">
+            <Sparkles className="h-6 w-6 text-white" />
           </div>
-          <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">CoFinance</span>
+          <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">CoFinance</span>
         </div>
 
-        <nav className="flex-1 space-y-1.5 overflow-y-auto">
+        <nav className="flex-1 space-y-2 overflow-y-auto">
           <Link href="/dashboard">
-            <Button variant="ghost" className="w-full justify-start gap-3 h-11 text-base font-medium hover:bg-primary/10 hover:text-primary transition-all duration-200">
-              <LayoutDashboard className="h-5 w-5" />
+            <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-base font-medium hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary hover:shadow-sm hover:scale-[1.02] active:scale-100 transition-all duration-200 rounded-xl">
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <LayoutDashboard className="h-4 w-4" />
+              </div>
               Dashboard
             </Button>
           </Link>
           <Link href="/transactions">
-            <Button variant="ghost" className="w-full justify-start gap-3 h-11 text-base font-medium hover:bg-primary/10 hover:text-primary transition-all duration-200">
-              <CreditCard className="h-5 w-5" />
+            <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-base font-medium hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary hover:shadow-sm hover:scale-[1.02] active:scale-100 transition-all duration-200 rounded-xl">
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <CreditCard className="h-4 w-4" />
+              </div>
               Transações
             </Button>
           </Link>
           <Link href="/shared-group">
-            <Button variant="ghost" className="w-full justify-start gap-3 h-11 text-base font-medium hover:bg-primary/10 hover:text-primary transition-all duration-200">
-              <Users className="h-5 w-5" />
+            <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-base font-medium hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary hover:shadow-sm hover:scale-[1.02] active:scale-100 transition-all duration-200 rounded-xl">
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Users className="h-4 w-4" />
+              </div>
               Grupo Compartilhado
             </Button>
           </Link>
           <Link href="/settings">
-            <Button variant="ghost" className="w-full justify-start gap-3 h-11 text-base font-medium hover:bg-primary/10 hover:text-primary transition-all duration-200">
-              <Settings className="h-5 w-5" />
+            <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-base font-medium hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary hover:shadow-sm hover:scale-[1.02] active:scale-100 transition-all duration-200 rounded-xl">
+              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Settings className="h-4 w-4" />
+              </div>
               Configurações
             </Button>
           </Link>
         </nav>
 
-        <div className="pt-6 border-t border-border/30 shrink-0">
-          <div className="flex items-center justify-between mb-4 p-3 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/5">
+        <div className="pt-6 border-t border-border/20 shrink-0">
+          <div className="flex items-center justify-between mb-4 p-4 rounded-2xl bg-gradient-to-r from-primary/8 via-primary/5 to-secondary/8 border border-primary/10 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-sm font-bold text-primary shadow-sm">
+              <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center text-base font-bold text-primary shadow-md ring-2 ring-white/50 dark:ring-gray-800/50">
                 {session.user.name?.[0] || "U"}
               </div>
               <div className="flex-1 overflow-hidden">
                 <p className="text-sm font-semibold truncate text-foreground">{session.user.name}</p>
-                <p className="text-xs text-muted-foreground truncate">Conta pessoal</p>
+                <p className="text-xs text-muted-foreground truncate flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Conta ativa
+                </p>
               </div>
             </div>
             <Notifications />
