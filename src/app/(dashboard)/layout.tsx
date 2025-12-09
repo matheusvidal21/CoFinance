@@ -62,7 +62,7 @@ export default async function DashboardLayout({
           <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">CoFinance</span>
         </div>
 
-        <nav className="flex-1 space-y-2 overflow-y-auto">
+        <nav className="flex-1 space-y-2">
           <Link href="/dashboard">
             <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-base font-medium hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:text-primary hover:shadow-sm hover:scale-[1.02] active:scale-100 transition-all duration-200 rounded-xl">
               <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
